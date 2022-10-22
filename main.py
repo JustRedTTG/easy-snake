@@ -156,12 +156,12 @@ def get_next_snake_position():
     elif snake_direction == 2: # Down
         yi += 1                # Add one to y index, which is down in our case
     elif snake_direction == 3: # Left
-        xi -= 1                # Remove one from x, which is left
+        xi -= 1                # Remove one from x index, which is left
 
     # Now we have to verify the position
     if xi < 0:               # The snake has gone too far to the left
         xi = board_size-1    # > We go to the right far-most side
-    elif xi >= board_size:   # The snake has gone too far to the left
+    elif xi >= board_size:   # The snake has gone too far to the right
         xi = 0               # > We go to the left far-most side
     elif yi < 0:             # The snake has gone too far to the top
         yi = board_size-1    # > We go to the bottom far-most side
