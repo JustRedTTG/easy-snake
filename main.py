@@ -24,6 +24,7 @@ Thanks to the power of pygameextra for making things even easier <3
 """
 
 full_screen = False # Full screen preferences
+mobile_controls = True # Mobile preferences
 
 if full_screen:
     pe.init((0, 0)) # Initialize PygameExtra to width 0 and height 0, which is the maximum size
@@ -226,14 +227,14 @@ def event_handler():
     if pe.event.resizeCheck():
         pe.event.rundown()
         resize()
-
-    if pe.event.key_DOWN(pe.pygame.K_LEFT) or pe.event.key_DOWN(pe.pygame.K_a):       # Keypress left
+    pos = pe.mouse.pos()
+    if pe.event.key_DOWN(pe.pygame.K_LEFT) or pe.event.key_DOWN(pe.pygame.K_a) or (mobile_controls and pos[0] < w//2 and h//3 <= pos[1] <= h-h//3):       # Keypress left
         new_snake_direction = 3                                                       # > Update the new snake position to left
-    elif pe.event.key_DOWN(pe.pygame.K_RIGHT) or pe.event.key_DOWN(pe.pygame.K_d):    # Keypress right
+    elif pe.event.key_DOWN(pe.pygame.K_RIGHT) or pe.event.key_DOWN(pe.pygame.K_d) or (mobile_controls and pos[0] > w//2 and h//3 <= pos[1] <= h-h//3):    # Keypress right
         new_snake_direction = 1                                                       # > Update the new snake position to right
-    if pe.event.key_DOWN(pe.pygame.K_DOWN) or pe.event.key_DOWN(pe.pygame.K_s):       # Keypress down
+    if pe.event.key_DOWN(pe.pygame.K_DOWN) or pe.event.key_DOWN(pe.pygame.K_s) or (mobile_controls and pos[1] > h//2 and w//3 <= pos[0] <= w-w//3):       # Keypress down
         new_snake_direction = 2                                                       # > Update the new snake position to down
-    elif pe.event.key_DOWN(pe.pygame.K_UP) or pe.event.key_DOWN(pe.pygame.K_w):       # Keypress up
+    elif pe.event.key_DOWN(pe.pygame.K_UP) or pe.event.key_DOWN(pe.pygame.K_w) or (mobile_controls and pos[1] < h//2 and w//3 <= pos[0] <= w-w//3):       # Keypress up
         new_snake_direction = 0                                                       # > Update the new snake position to up
     if pe.event.key_DOWN(pe.pygame.K_ESCAPE) or pe.event.key_DOWN(pe.pygame.K_SPACE): # Keypress ESC or Space
         if game_over:          # If the game has ended and the player pressed this button
