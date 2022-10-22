@@ -31,13 +31,14 @@ if full_screen:
 else:
     pe.init() # Initialize PygameExtra
     w, h = 700, 500
+    pe.display.make((w, h), mode=pe.display.DISPLAY_MODE_HIDDEN)
 
 
-offset_x = w//2 - h//2                   # Offset X
-offset_y = 0                             # Offset Y
+offset_x: int                   # Offset X
+offset_y: int                   # Offset Y
 
-board_size = 25                          # Board grid size
-board_pixel_size = h // board_size       # Cell pixel size in board
+board_size = 25                 # Board grid size
+board_pixel_size: int           # Cell pixel size in board
 
 time_in_milliseconds_till_movement = 120 # The variable name says it all tbh
 
@@ -83,13 +84,27 @@ def temp_calibrate():
                                   board_size * board_pixel_size)
     temp['board outline width'] = h // 200                       # Calculate the outline width
     temp['move time requirement'] = time_in_milliseconds_till_movement / 1000 # Calculate the move time requirement
-    temp['score font size'] = int(w * .035)    # Make the score text font size to be .03 times the screen width
-    temp['score'] = pe.text.Text('0', 'font.ttf', temp['score font size'], (offset_x//2, temp['score font size']), [colors['score color'], None]) # Make the score text
+    temp['score font size'] = int((w if w > h else h) * (.035 if w > h else .04))    # Make the score text font size to be .03 times the screen width
+    temp['score'] = pe.text.Text('0', 'font.ttf', temp['score font size'], (offset_x//2 if w > h else w//2, temp['score font size']), [colors['score color'], None]) # Make the score text
     temp['game over font size'] = int((board_size * board_pixel_size) * .14) # Make the game over text font size to be .14 times the game screen
     temp['pause font size'] = int((board_size * board_pixel_size) * .14)     # Same goes for the pause text
     temp['game over'] = pe.text.Text('GAME OVER', 'font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], colors['game over background']]) # Make the game over text
     temp['game over translucent'] = pe.text.Text('GAME OVER', 'font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], None])               # Make the translucent game over text
     temp['pause'] = pe.text.Text('PAUSED', 'font.ttf', temp['pause font size'], (w // 2, h // 2), [colors['pause color'], None]) # >>>                                # Make the pause text
+
+
+def resize():
+    global offset_x, offset_y, board_pixel_size, w, h
+    w, h = pe.display.get_size()
+    if w > h:
+        offset_x = w // 2 - h // 2
+        board_pixel_size = h // board_size
+        offset_y = h // 2 - (board_size * board_pixel_size) // 2
+    else:
+        offset_y = h // 2 - w // 2
+        board_pixel_size = w // board_size
+        offset_x = w // 2 - (board_size * board_pixel_size) // 2
+    temp_calibrate()
 
 
 def calculate_snake_color(snake_index, translucency):
@@ -116,7 +131,7 @@ def draw_board(translucency):
     while x < board_size: # Loop through the board columns
         for index, y in enumerate(board[x]): # Loop through the rows in this column
             if y == -1:                      # It's an apple, draw an apple!!
-                pe.draw.rect((*colors['apple color'], translucency), (x_in_pixel, y_in_pixel, board_pixel_size, board_pixel_size))
+                pe.draw.ellipse((*colors['apple color'], translucency), (x_in_pixel, y_in_pixel, board_pixel_size, board_pixel_size))
             elif 0 < y <= snake_size:        # It's a part of the snake, draw a snake!!
                 pe.draw.rect(calculate_snake_color(y, translucency), (x_in_pixel, y_in_pixel, board_pixel_size, board_pixel_size))
             y_in_pixel += board_pixel_size   # Increase the y value by the board pixel size
@@ -207,7 +222,10 @@ def event_handler():
     global snake_direction, pause, game_over
     pe.event.quitcheckauto() # Quit if the X button is pressed
 
-    new_snake_direction = -1 # Initialize the new snake direction to be nonexistent
+    new_snake_direction = -1 # Initialize the new snake direction to be no nexistent
+    if pe.event.resizeCheck():
+        pe.event.rundown()
+        resize()
 
     if pe.event.key_DOWN(pe.pygame.K_LEFT) or pe.event.key_DOWN(pe.pygame.K_a):       # Keypress left
         new_snake_direction = 3                                                       # > Update the new snake position to left
@@ -248,13 +266,13 @@ def event_handler():
 
 
 initialize_board() # Initialize the board
-temp_calibrate()   # Calculate all temporary values
+resize()   # Calculate all temporary values
 delta_time = 0     # Set a starter value for delta time
 pre_delta_time = 0 # Set a starter value for the previous delta time
 await_move = 0     # Set a starter value for move time
 
 # We create a display reference using the provided width, height and full screen variables
-pe.display.make((w, h), "Simple Snake", pe.display.DISPLAY_MODE_FULLSCREEN if full_screen else pe.display.DISPLAY_MODE_NORMAL)
+pe.display.make((w, h), "Simple Snake", pe.display.DISPLAY_MODE_FULLSCREEN if full_screen else pe.display.DISPLAY_MODE_RESIZABLE)
 
 while True:
     t = pe.pygame.time.get_ticks()                     # Get the ticks
