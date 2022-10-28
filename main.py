@@ -24,7 +24,7 @@ Thanks to the power of pygameextra for making things even easier <3
 """
 
 full_screen = False # Full screen preferences
-mobile_controls = True # Mobile preferences
+mobile_controls = False # Mobile preferences
 
 if full_screen:
     pe.init((0, 0)) # Initialize PygameExtra to width 0 and height 0, which is the maximum size
