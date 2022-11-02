@@ -34,9 +34,9 @@ include $(DEVKITARM)/3ds_rules
 #     - icon.png
 #     - <libctru folder>/default_icon.png
 #---------------------------------------------------------------------------------
-APP_TITLE   :=  "Easy Snake"
-APP_DESCRIPTION := "A port for the 3DS"
-APP_AUTHOR  :=  "JustRedTTG"
+APP_TITLE   :=  Easy Snake
+APP_DESCRIPTION := A port for the 3DS
+APP_AUTHOR  :=  JustRedTTG
 TARGET		:=	$(notdir $(CURDIR))
 BUILD		:=	build
 SOURCES		:=	source
