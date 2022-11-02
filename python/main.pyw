@@ -84,12 +84,12 @@ def temp_calibrate():
     temp['board outline width'] = h // 200                       # Calculate the outline width
     temp['move time requirement'] = time_in_milliseconds_till_movement / 1000 # Calculate the move time requirement
     temp['score font size'] = int(w * .035)    # Make the score text font size to be .03 times the screen width
-    temp['score'] = pe.text.Text('0', 'font.ttf', temp['score font size'], (offset_x//2, temp['score font size']), [colors['score color'], None]) # Make the score text
+    temp['score'] = pe.text.Text('0', '../font.ttf', temp['score font size'], (offset_x//2, temp['score font size']), [colors['score color'], None]) # Make the score text
     temp['game over font size'] = int((board_size * board_pixel_size) * .14) # Make the game over text font size to be .14 times the game screen
     temp['pause font size'] = int((board_size * board_pixel_size) * .14)     # Same goes for the pause text
-    temp['game over'] = pe.text.Text('GAME OVER', 'font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], colors['game over background']]) # Make the game over text
-    temp['game over translucent'] = pe.text.Text('GAME OVER', 'font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], None])               # Make the translucent game over text
-    temp['pause'] = pe.text.Text('PAUSED', 'font.ttf', temp['pause font size'], (w // 2, h // 2), [colors['pause color'], None]) # >>>                                # Make the pause text
+    temp['game over'] = pe.text.Text('GAME OVER', '../font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], colors['game over background']]) # Make the game over text
+    temp['game over translucent'] = pe.text.Text('GAME OVER', '../font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], None])               # Make the translucent game over text
+    temp['pause'] = pe.text.Text('PAUSED', '../font.ttf', temp['pause font size'], (w // 2, h // 2), [colors['pause color'], None]) # >>>                                # Make the pause text
 
 
 def calculate_snake_color(snake_index, translucency):
