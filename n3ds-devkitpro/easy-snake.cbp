@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="easy-snake" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="devkitpro" />
+		<Build>
+			<Target title="Release">
+				<Option output="easy-snake.bat" prefix_auto="0" extension_auto="0" />
+				<Option object_output="C:/Users/Lenovo/3DS_Projects_local/templates/3DS graphics template/.objs" />
+				<Option type="0" />
+				<Option compiler="devkitpro" />
+				<MakeCommands>
+					<Build command="build.bat" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile clean" />
+					<SilentBuild command="build.bat &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="Makefile" />
+		<Unit filename="build.bat" />
+		<Unit filename="source/data.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/data.h" />
+		<Unit filename="source/draw.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/draw.h" />
+		<Unit filename="source/info.h" />
+		<Unit filename="source/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/renderer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
