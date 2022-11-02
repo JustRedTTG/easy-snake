@@ -84,12 +84,12 @@ def temp_calibrate():
     temp['board outline width'] = h // 200                       # Смятаме ширината на очертаването
     temp['move time requirement'] = time_in_milliseconds_till_movement / 1000 # Смятаме нужното време за действие
     temp['score font size'] = int(w * .035)    # Правиме шрифта на точките да е .035 размера на ширината на екрана
-    temp['score'] = pe.text.Text('0', 'font.ttf', temp['score font size'], (offset_x//2, temp['score font size']), [colors['score color'], None]) # Правиме текста за точките
+    temp['score'] = pe.text.Text('0', '../font.ttf', temp['score font size'], (offset_x//2, temp['score font size']), [colors['score color'], None]) # Правиме текста за точките
     temp['game over font size'] = int((board_size * board_pixel_size) * .14) # Правиме шрифта на точките да е .14 размера на таблото
     temp['pause font size'] = int((board_size * board_pixel_size) * .14)     # Същото и за паузата
-    temp['game over'] = pe.text.Text('GAME OVER', 'font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], colors['game over background']]) # Правиме тескта за край на играта
-    temp['game over translucent'] = pe.text.Text('GAME OVER', 'font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], None])               # Правиме прозрачен тескт за край на играта
-    temp['pause'] = pe.text.Text('PAUSED', 'font.ttf', temp['pause font size'], (w // 2, h // 2), [colors['pause color'], None]) # >>>                                # Прарим текста за паузата
+    temp['game over'] = pe.text.Text('GAME OVER', '../font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], colors['game over background']]) # Правиме тескта за край на играта
+    temp['game over translucent'] = pe.text.Text('GAME OVER', '../font.ttf', temp['game over font size'], (w//2, h//2), [colors['game over color'], None])               # Правиме прозрачен тескт за край на играта
+    temp['pause'] = pe.text.Text('PAUSED', '../font.ttf', temp['pause font size'], (w // 2, h // 2), [colors['pause color'], None]) # >>>                                # Прарим текста за паузата
 
 
 def calculate_snake_color(snake_index, translucency):
