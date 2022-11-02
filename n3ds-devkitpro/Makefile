@@ -7,6 +7,9 @@ $(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>dev
 endif
 
 TOPDIR ?= $(CURDIR)
+ifneq (1,$(words $(CURDIR)))
+$(error Containing path cannot contain whitespace: '$(CURDIR)')
+endif
 include $(DEVKITARM)/3ds_rules
 
 #---------------------------------------------------------------------------------
