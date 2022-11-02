@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
 	C3D_Init(C3D_DEFAULT_CMDBUF_SIZE);
 	C2D_Init(C2D_DEFAULT_MAX_OBJECTS);
 	C2D_Prepare();
-	gfxSet3D(true);
+	gfxSet3D(false);
 
 	// Display buffers
 	C3D_RenderTarget* top = C2D_CreateScreenTarget(GFX_TOP, GFX_LEFT);
@@ -43,12 +43,12 @@ int main(int argc, char* argv[]) {
 
         draw(-1);
 
-        if (CONFIG_3D_SLIDERSTATE > 0.0f){
-            C2D_TargetClear(top_r, clrClear);
-            C2D_SceneBegin(top_r);
-            depth_mode = true;
-            draw(1);
-        }
+        //if (CONFIG_3D_SLIDERSTATE > 0.0f){
+        //    C2D_TargetClear(top_r, clrClear);
+        //    C2D_SceneBegin(top_r);
+        //    depth_mode = true;
+        //    draw(1);
+        //}
         if (debug_level > -1){
             C2D_TargetClear(bot, botclrClear);
             C2D_SceneBegin(bot);
