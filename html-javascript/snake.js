@@ -154,6 +154,7 @@ function draw_board() {
   for (var x = 0; x < board_size; x++) {
     for (var y = 0; y < board_size; y++) {
       var v = board[x][y];
+      var snake_head_x, snake_head_y;
       if (v == -1) {
         board_context.strokeStyle = "red";
         board_context.fillStyle = "red";
@@ -166,11 +167,70 @@ function draw_board() {
         var [r, g, b] = calculate_snake_color(v);
         board_context.fillStyle = "rgb("+String(r)+", "+String(g)+", "+String(b)+")";
         board_context.fillRect(x_in_pixel, y_in_pixel, board_pixel_size, board_pixel_size);
+        if (v == 1) {
+          snake_head_x = x;
+          snake_head_y = y;
+        }
       }
       y_in_pixel += board_pixel_size;
     }
     x_in_pixel += board_pixel_size;
     y_in_pixel = offset_y;
+  }
+  x_in_pixel = snake_head_x * board_pixel_size + offset_x;
+  y_in_pixel = snake_head_y * board_pixel_size + offset_y;
+  // Snake EYES
+  if (snake_direction == 0) { // Up
+    board_context.strokeStyle = "white";
+    board_context.fillStyle = "black";
+    board_context.beginPath();
+    board_context.ellipse(x_in_pixel + board_pixel_size / 8, y_in_pixel + Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), 0, 0, 2 * Math.PI);
+    board_context.fill();
+    board_context.stroke();
+            
+    board_context.beginPath();
+    board_context.ellipse(x_in_pixel + board_pixel_size - (board_pixel_size/8), y_in_pixel + Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), 0, 0, 2 * Math.PI);
+    board_context.fill();
+    board_context.stroke();
+  }
+  else if (snake_direction == 1) { // Right
+    board_context.strokeStyle = "white";
+    board_context.fillStyle = "black";
+    board_context.beginPath();
+    board_context.ellipse(x_in_pixel + board_pixel_size - (board_pixel_size/8), y_in_pixel + board_pixel_size - (board_pixel_size/8), Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), 0, 0, 2 * Math.PI);
+    board_context.fill();
+    board_context.stroke();
+            
+    board_context.beginPath();
+    board_context.ellipse(x_in_pixel + board_pixel_size - (board_pixel_size/8), y_in_pixel + Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), 0, 0, 2 * Math.PI);
+    board_context.fill();
+    board_context.stroke();
+  }
+  else if (snake_direction == 2) { // Down
+    board_context.strokeStyle = "white";
+    board_context.fillStyle = "black";
+    board_context.beginPath();
+    board_context.ellipse(x_in_pixel + board_pixel_size / 8, y_in_pixel + board_pixel_size - Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), 0, 0, 2 * Math.PI);
+    board_context.fill();
+    board_context.stroke();
+            
+    board_context.beginPath();
+    board_context.ellipse(x_in_pixel + board_pixel_size - (board_pixel_size/8), y_in_pixel + board_pixel_size - Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), 0, 0, 2 * Math.PI);
+    board_context.fill();
+    board_context.stroke();
+  }
+  else if (snake_direction == 3) { // Left
+    board_context.strokeStyle = "white";
+    board_context.fillStyle = "black";
+    board_context.beginPath();
+    board_context.ellipse(x_in_pixel + board_pixel_size/8, y_in_pixel + board_pixel_size - (board_pixel_size/8), Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), 0, 0, 2 * Math.PI);
+    board_context.fill();
+    board_context.stroke();
+            
+    board_context.beginPath();
+    board_context.ellipse(x_in_pixel + board_pixel_size/8, y_in_pixel + Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), Math.floor(board_pixel_size / 8), 0, 0, 2 * Math.PI);
+    board_context.fill();
+    board_context.stroke();
   }
   document.dispatchEvent(drawboard_event);
   board_context.strokeStyle = "white";
